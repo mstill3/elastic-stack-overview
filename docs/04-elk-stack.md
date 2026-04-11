@@ -1,11 +1,40 @@
 # ELK Stack
 
+> Elasticsearch, Logstash, Kibana
+
+## What is the ELK Stack?
+
+ELK stands for:
+
+- **Elasticsearch**: stores and searches data
+- **Logstash**: ingests and transforms data
+- **Kibana**: visualizes and explores data
+
+Together, they form a pipeline for collecting data, storing it, and displaying it.
+
+## Workflow
+
+Think of the stack like this:
+
+1. Logstash receives data from files, APIs, message queues, or other systems
+2. Logstash parses and cleans the data so it has a consistent structure
+3. Elasticsearch stores that structured data in indexes
+4. Kibana lets you search, filter, visualize, and build dashboards from the data in Elasticsearch
+
+```text
+Data_Source -> Logstash -> Elasticsearch -> Kibana
+
+Data_Source -> Ingestion -> Transform/Enrich -> Storage -> UI
+```
+
 ## Pipeline
 
 The ELK stack is easiest to understand as a pipeline:
 
 ```text
 Data_Source -> Logstash -> Elasticsearch -> Kibana
+
+Data_Source -> Ingestion -> Transform/Enrich -> Storage -> UI
 ```
 
 That single line is the core of the whole stack. Everything else is detail around how well each stage does its job.

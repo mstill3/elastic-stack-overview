@@ -25,3 +25,7 @@ Think of the stack like this:
 2. Logstash parses and cleans the data so it has a consistent structure
 3. Elasticsearch stores that structured data in indexes
 4. Kibana lets you search, filter, visualize, and build dashboards from the data in Elasticsearch
+
+```text
+Data_Source -> Logstash -> Elasticsearch -> Kibana
+```

@@ -5,7 +5,7 @@
 The ELK stack is easiest to understand as a pipeline:
 
 ```text
-Data Source -> Logstash -> Elasticsearch -> Kibana
+Data_Source -> Logstash -> Elasticsearch -> Kibana
 ```
 
 That single line is the core of the whole stack. Everything else is detail around how well each stage does its job.

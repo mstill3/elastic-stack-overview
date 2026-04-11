@@ -1,5 +1,7 @@
 # Elasticsearch
 
+> Storage system
+
 ## What is Elasticsearch?
 
 Elasticsearch is a distributed search and analytics engine. It is designed to store large volumes of structured data and make that data searchable very quickly.
@@ -18,7 +20,7 @@ It is especially powerful when your data has clear field types and you need to s
 
 Elasticsearch terminology:
 
-- **Document**: one record
+- **Document**: a record
 - **Index**: collection of records
 - **Field**: a property on a record
 - **Mapping**: defines the datatype for each field
@@ -31,7 +33,7 @@ Elasticsearch terminology:
 
 ### Document
 
-A document is a single JSON object stored in Elasticsearch.
+A document is a JSON object stored in Elasticsearch.
 
 Example:
 

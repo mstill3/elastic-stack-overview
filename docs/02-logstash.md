@@ -1,5 +1,7 @@
 # Logstash
 
+> Ingestion & transformation layer
+
 ## What is Logstash?
 
 Logstash is a data processing pipeline. It ingests data from one or more sources, transforms that data, and sends it to one or more destinations.
@@ -8,13 +10,11 @@ It is often used to:
 
 - read logs from files
 - ingest data from Kafka, Beats, or APIs
-- parse unstructured text into structured fields
+- **parse unstructured text into structured fields**
 - enrich events before storing them
 - route data to Elasticsearch
 
-If Elasticsearch is where data is stored, Logstash is often where data becomes usable.
-
-## The Role Of Logstash
+### Logstash's Role
 
 Logstash is most useful when incoming data is inconsistent.
 
@@ -26,9 +26,9 @@ Its job is usually to:
 - normalize datatypes where possible
 - send the cleaned event onward
 
-In practice, this means Logstash is where you shape the data model that Elasticsearch and Kibana will depend on.
+Logstash is where you shape the data to what Elasticsearch & Kibana depend on.
 
-## The Three-Part Pipeline
+## Logstash's Three-Part Pipeline
 
 A Logstash pipeline has three stages:
 
@@ -46,7 +46,7 @@ output {}
 
 You can think of every event as moving through these three stages in order.
 
-## Inputs: Where Events Come From
+### 1. Inputs
 
 The input stage defines where events come from.
 
@@ -70,7 +70,7 @@ input {
 
 Inputs determine how data enters the pipeline, but they usually do not do much cleanup by themselves.
 
-## Filters: Where Events Are Shaped
+### 2. Filters
 
 The filter stage parses, transforms, and enriches events.
 
@@ -82,7 +82,7 @@ Common filters:
 - `json`: parse JSON text
 - `geoip`: enrich IP addresses with location data
 
-This is where most of the real work happens.
+This is where most of the real "work" happens.
 
 Example:
 
@@ -114,7 +114,7 @@ In that example:
 - `date` converts a string timestamp into a proper event timestamp
 - `mutate` converts numeric-looking fields into numeric values
 
-## Outputs: Where Events Go
+### 3. Outputs
 
 The output stage defines where processed events are sent.
 
@@ -148,6 +148,7 @@ output {
 }
 ```
 
+>>>> TODO: stopped here
 ## What A Logstash Event Looks Like
 
 Logstash processes data as events. An event is a structured record with fields, similar to a JSON document.
@@ -291,35 +292,10 @@ output {
 }
 ```
 
-## How To Debug A Pipeline
-
-When learning Logstash, it helps to debug in small steps.
-
-Good habits:
-
-- start with a single sample input
-- print events to `stdout`
-- verify field names before sending to Elasticsearch
-- check timestamps carefully
-- keep filters simple until the event shape looks correct
-
-## Common Beginner Mistakes
-
-- trying to parse too many formats in one pipeline before validating one format
-- keeping important values only inside the raw `message` field
-- forgetting to normalize timestamps
-- using inconsistent field names between sources
-- assuming Elasticsearch will always infer the correct datatype
-
 ## What Logstash Is Not
-
-Logstash is not primarily a storage system or a dashboard tool.
 
 Its main purpose is moving and transforming events between systems.
 
 ## Key Takeaways
 
-- Logstash is the ingestion and transformation layer
-- Pipelines use `input`, `filter`, and `output`
 - The goal is to convert raw data into structured events
-- Cleaner data in Logstash leads to better search and dashboards in Elasticsearch and Kibana

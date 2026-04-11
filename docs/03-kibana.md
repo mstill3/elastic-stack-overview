@@ -1,5 +1,7 @@
 # Kibana
 
+> Visualization dashboard UI
+
 ## What is Kibana?
 
 Kibana is the visualization and exploration interface for Elasticsearch data. It lets users search records, build charts, and create dashboards.
@@ -10,7 +12,7 @@ It is commonly used for:
 - dashboard creation
 - operational monitoring
 - security investigation
-- ad hoc data analysis
+- ad-hoc data analysis
 
 Kibana is often the first place where users notice whether the underlying data model is clean or messy.
 
@@ -154,14 +156,6 @@ Good first visualizations include:
 - average `response_time_ms` by service
 
 These are simple, but they quickly reveal whether your data is being indexed correctly.
-
-## Common Beginner Mistakes
-
-- building dashboards before checking raw documents in Discover
-- expecting Kibana to fix poor field design
-- using the wrong time range and thinking data is missing
-- forgetting that exact-match charts depend on `keyword`-style fields
-- trying to chart a field that was ingested as text instead of a number or date
 
 ## Why Kibana Becomes So Valuable
 

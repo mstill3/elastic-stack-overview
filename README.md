@@ -2,7 +2,7 @@
 
 > Elasticsearch, Logstash, Kibana
 
-Documentation for understanding the ELK stack:
+Documentation for understanding the ELK stack
 
 - [01-elasticsearch.md](docs/01-elasticsearch.md)
 - [02-logstash.md](docs/02-logstash.md)

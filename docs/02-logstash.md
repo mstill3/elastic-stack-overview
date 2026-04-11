@@ -1,6 +1,6 @@
 # Logstash
 
-## What Logstash Does
+## What is Logstash?
 
 Logstash is a data processing pipeline. It ingests data from one or more sources, transforms that data, and sends it to one or more destinations.
 
@@ -39,14 +39,9 @@ A Logstash pipeline has three stages:
 Basic shape:
 
 ```conf
-input {
-}
-
-filter {
-}
-
-output {
-}
+input {}
+filter {}
+output {}
 ```
 
 You can think of every event as moving through these three stages in order.
@@ -66,10 +61,10 @@ Example:
 
 ```conf
 input {
-  file {
-    path => "/var/log/app.log"
-    start_position => "beginning"
-  }
+    file {
+        path => "/var/log/app.log"
+        start_position => "beginning"
+    }
 }
 ```
 
@@ -93,23 +88,23 @@ Example:
 
 ```conf
 filter {
-  grok {
-    match => {
-      "message" => "%{TIMESTAMP_ISO8601:log_time} %{LOGLEVEL:level} %{NOTSPACE:service} user_id=%{INT:user_id} response_time_ms=%{INT:response_time_ms} message=\"%{GREEDYDATA:message}\""
+    grok {
+        match => {
+            "message" => "%{TIMESTAMP_ISO8601:log_time} %{LOGLEVEL:level} %{NOTSPACE:service} user_id=%{INT:user_id} response_time_ms=%{INT:response_time_ms} message=\"%{GREEDYDATA:message}\""
+        }
     }
-  }
 
-  date {
-    match => [ "log_time", "ISO8601" ]
-    target => "@timestamp"
-  }
-
-  mutate {
-    convert => {
-      "user_id" => "integer"
-      "response_time_ms" => "integer"
+    date {
+        match => [ "log_time", "ISO8601" ]
+        target => "@timestamp"
     }
-  }
+
+    mutate {
+        convert => {
+            "user_id" => "integer"
+            "response_time_ms" => "integer"
+        }
+    }
 }
 ```
 
@@ -134,10 +129,10 @@ Example:
 
 ```conf
 output {
-  elasticsearch {
-    hosts => ["http://localhost:9200"]
-    index => "application-logs"
-  }
+    elasticsearch {
+        hosts => ["http://localhost:9200"]
+        index => "application-logs"
+    }
 }
 ```
 
@@ -147,7 +142,9 @@ Example:
 
 ```conf
 output {
-  stdout { codec => rubydebug }
+    stdout {
+        codec => rubydebug
+    }
 }
 ```
 
@@ -161,12 +158,12 @@ Example event after parsing:
 
 ```json
 {
-  "@timestamp": "2026-04-09T20:00:00Z",
-  "service": "auth-api",
-  "level": "ERROR",
-  "message": "User login failed",
-  "user_id": 42,
-  "response_time_ms": 124
+    "@timestamp": "2026-04-09T20:00:00Z",
+    "service": "auth-api",
+    "level": "ERROR",
+    "message": "User login failed",
+    "user_id": 42,
+    "response_time_ms": 124
 }
 ```
 
@@ -231,12 +228,12 @@ After parsing, Logstash might produce:
 
 ```json
 {
-  "@timestamp": "2026-04-09T20:00:00Z",
-  "service": "auth-api",
-  "level": "ERROR",
-  "message": "User login failed",
-  "user_id": 42,
-  "response_time_ms": 124
+    "@timestamp": "2026-04-09T20:00:00Z",
+    "service": "auth-api",
+    "level": "ERROR",
+    "message": "User login failed",
+    "user_id": 42,
+    "response_time_ms": 124
 }
 ```
 
@@ -244,13 +241,13 @@ A more complete result might look like this:
 
 ```json
 {
-  "@timestamp": "2026-04-09T20:00:00Z",
-  "level": "ERROR",
-  "service": "auth-api",
-  "message": "User login failed",
-  "user_id": 42,
-  "response_time_ms": 124,
-  "environment": "prod"
+    "@timestamp": "2026-04-09T20:00:00Z",
+    "level": "ERROR",
+    "service": "auth-api",
+    "message": "User login failed",
+    "user_id": 42,
+    "response_time_ms": 124,
+    "environment": "prod"
 }
 ```
 
@@ -258,39 +255,39 @@ A more complete result might look like this:
 
 ```conf
 input {
-  file {
-    path => "/var/log/app.log"
-    start_position => "beginning"
-  }
+    file {
+        path => "/var/log/app.log"
+        start_position => "beginning"
+    }
 }
 
 filter {
-  grok {
-    match => {
-      "message" => "%{TIMESTAMP_ISO8601:log_time} %{LOGLEVEL:level} %{NOTSPACE:service} user_id=%{INT:user_id} response_time_ms=%{INT:response_time_ms} message=\"%{GREEDYDATA:message}\""
+    grok {
+        match => {
+            "message" => "%{TIMESTAMP_ISO8601:log_time} %{LOGLEVEL:level} %{NOTSPACE:service} user_id=%{INT:user_id} response_time_ms=%{INT:response_time_ms} message=\"%{GREEDYDATA:message}\""
+        }
     }
-  }
 
-  date {
-    match => [ "log_time", "ISO8601" ]
-    target => "@timestamp"
-  }
-
-  mutate {
-    convert => {
-      "user_id" => "integer"
-      "response_time_ms" => "integer"
+    date {
+        match => [ "log_time", "ISO8601" ]
+        target => "@timestamp"
     }
-    add_field => { "environment" => "prod" }
-    remove_field => [ "log_time" ]
-  }
+
+    mutate {
+        convert => {
+            "user_id" => "integer"
+            "response_time_ms" => "integer"
+        }
+        add_field => { "environment" => "prod" }
+        remove_field => [ "log_time" ]
+    }
 }
 
 output {
-  elasticsearch {
-    hosts => ["http://localhost:9200"]
-    index => "application-logs"
-  }
+    elasticsearch {
+        hosts => ["http://localhost:9200"]
+        index => "application-logs"
+    }
 }
 ```
 
@@ -322,7 +319,7 @@ Its main purpose is moving and transforming events between systems.
 
 ## Key Takeaways
 
-- Logstash is the ingestion and transformation layer.
-- Pipelines use `input`, `filter`, and `output`.
-- The goal is to convert raw data into structured events.
-- Cleaner data in Logstash leads to better search and dashboards in Elasticsearch and Kibana.
+- Logstash is the ingestion and transformation layer
+- Pipelines use `input`, `filter`, and `output`
+- The goal is to convert raw data into structured events
+- Cleaner data in Logstash leads to better search and dashboards in Elasticsearch and Kibana

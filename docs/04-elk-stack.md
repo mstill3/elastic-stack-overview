@@ -1,6 +1,6 @@
 # ELK Stack
 
-## The Pipeline In One Line
+## Pipeline
 
 The ELK stack is easiest to understand as a pipeline:
 
@@ -43,12 +43,12 @@ Example output event:
 
 ```json
 {
-  "@timestamp": "2026-04-09T20:00:00Z",
-  "service": "auth-api",
-  "level": "ERROR",
-  "message": "User login failed",
-  "user_id": 42,
-  "response_time_ms": 124
+    "@timestamp": "2026-04-09T20:00:00Z",
+    "service": "auth-api",
+    "level": "ERROR",
+    "message": "User login failed",
+    "user_id": 42,
+    "response_time_ms": 124
 }
 ```
 
@@ -91,12 +91,12 @@ It helps to track one event from start to finish.
 
 ```json
 {
-  "@timestamp": "2026-04-09T20:00:00Z",
-  "level": "ERROR",
-  "service": "auth-api",
-  "message": "User login failed",
-  "user_id": 42,
-  "response_time_ms": 124
+    "@timestamp": "2026-04-09T20:00:00Z",
+    "level": "ERROR",
+    "service": "auth-api",
+    "message": "User login failed",
+    "user_id": 42,
+    "response_time_ms": 124
 }
 ```
 
@@ -132,12 +132,12 @@ Logstash parses it into fields:
 
 ```json
 {
-  "@timestamp": "2026-04-09T20:00:00Z",
-  "level": "ERROR",
-  "service": "auth-api",
-  "message": "User login failed",
-  "user_id": 42,
-  "response_time_ms": 124
+    "@timestamp": "2026-04-09T20:00:00Z",
+    "level": "ERROR",
+    "service": "auth-api",
+    "message": "User login failed",
+    "user_id": 42,
+    "response_time_ms": 124
 }
 ```
 
@@ -155,15 +155,15 @@ Datatypes are one of the clearest links between all three tools.
 
 Examples:
 
-- Logstash extracts a timestamp string.
-- Elasticsearch maps that field as `date`.
-- Kibana uses that `date` field for time filtering and date histograms.
+- Logstash extracts a timestamp string
+- Elasticsearch maps that field as `date`
+- Kibana uses that `date` field for time filtering and date histograms
 
 Another example:
 
-- Logstash extracts `level` as `ERROR`.
-- Elasticsearch maps `level` as `keyword`.
-- Kibana uses it in exact filters and top-values charts.
+- Logstash extracts `level` as `ERROR`
+- Elasticsearch maps `level` as `keyword`
+- Kibana uses it in exact filters and top-values charts
 
 If the datatype is wrong at the Elasticsearch stage, Kibana often becomes much less useful.
 
@@ -196,10 +196,10 @@ It also makes troubleshooting easier because you can ask:
 
 When something looks wrong in Kibana, work backward:
 
-1. Check whether the document exists in Elasticsearch.
-2. Check whether the fields and datatypes are correct.
-3. Check the Logstash output event shape.
-4. Check whether the original source data contains the expected values.
+1. Check whether the document exists in Elasticsearch
+2. Check whether the fields and datatypes are correct
+3. Check the Logstash output event shape
+4. Check whether the original source data contains the expected values
 
 This method is usually faster than guessing inside Kibana first.
 
@@ -226,7 +226,7 @@ Those four questions usually expose where the real issue is.
 
 If you are new to the stack, focus on this order:
 
-1. Understand what a document, field, index, and mapping are in Elasticsearch.
-2. Learn how Logstash converts raw input into structured events.
-3. Use Kibana Discover to confirm the indexed data looks correct.
-4. Build visualizations only after the field structure is clean.
+1. Understand what a document, field, index, and mapping are in Elasticsearch
+2. Learn how Logstash converts raw input into structured events
+3. Use Kibana Discover to confirm the indexed data looks correct
+4. Build visualizations only after the field structure is clean

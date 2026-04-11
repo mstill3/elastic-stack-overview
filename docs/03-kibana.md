@@ -1,6 +1,6 @@
 # Kibana
 
-## What Kibana Does
+## What is Kibana?
 
 Kibana is the visualization and exploration interface for Elasticsearch data. It lets users search records, build charts, and create dashboards.
 
@@ -85,11 +85,11 @@ Dashboards are useful when you want a repeatable operational view rather than on
 
 A common workflow looks like this:
 
-1. Create a data view for the target indexes.
-2. Open Discover and confirm documents look correct.
-3. Verify that `@timestamp` and key fields are usable.
-4. Build one or two visualizations.
-5. Add those visualizations to a dashboard.
+1. Create a data view for the target indexes
+2. Open Discover and confirm documents look correct
+3. Verify that `@timestamp` and key fields are usable
+4. Build one or two visualizations
+5. Add those visualizations to a dashboard
 
 ## Time Is Usually The Starting Point
 
@@ -171,8 +171,8 @@ It is also the fastest way to validate whether the rest of the pipeline is produ
 
 ## Key Takeaways
 
-- Kibana is the UI layer of the ELK stack.
-- It reads data from Elasticsearch.
-- Data views define which indexes you work with.
-- Discover is for raw exploration.
-- Visualizations and dashboards are for analysis and monitoring.
+- Kibana is the UI layer of the ELK stack
+- It reads data from Elasticsearch
+- Data views define which indexes you work with
+- Discover is for raw exploration
+- Visualizations and dashboards are for analysis and monitoring

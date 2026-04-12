@@ -12,8 +12,6 @@ ELK stands for:
 
 Together, they form a pipeline for collecting data, storing it, and displaying it.
 
->>> TODO
-
 ## Workflow
 
 Think of the stack like this:
@@ -25,21 +23,7 @@ Think of the stack like this:
 
 ```text
 Data_Source -> Logstash -> Elasticsearch -> Kibana
-
-Data_Source -> Ingestion -> Transform/Enrich -> Storage -> UI
 ```
-
-## Pipeline
-
-The ELK stack is easiest to understand as a pipeline:
-
-```text
-Data_Source -> Logstash -> Elasticsearch -> Kibana
-
-Data_Source -> Ingestion -> Transform/Enrich -> Storage -> UI
-```
-
-That single line is the core of the whole stack. Everything else is detail around how well each stage does its job.
 
 ## Step 1: Start With Raw Input
 
@@ -52,8 +36,6 @@ The source could be:
 - messages from Kafka or APIs
 
 At this stage, the data may be raw, inconsistent, or hard to query.
-
-Sources vary widely in quality. Some already produce clean JSON, while others only produce plain text lines that need heavy parsing.
 
 ## Step 2: Shape The Event
 
@@ -239,25 +221,4 @@ This method is usually faster than guessing inside Kibana first.
 - parse as early as possible
 - choose datatypes deliberately
 - keep field names consistent across sources
-- use Kibana Discover before building dashboards
 - test with a small sample before sending high-volume data
-
-## If You Get Lost, Reduce It To Four Questions
-
-If ELK feels confusing at first, simplify it to these questions:
-
-1. What is the raw input?
-2. What fields should exist after parsing?
-3. What datatype should each field have?
-4. What question do I want Kibana to answer?
-
-Those four questions usually expose where the real issue is.
-
-## A Good Learning Order
-
-If you are new to the stack, focus on this order:
-
-1. Understand what a document, field, index, and mapping are in Elasticsearch
-2. Learn how Logstash converts raw input into structured events
-3. Use Kibana Discover to confirm the indexed data looks correct
-4. Build visualizations only after the field structure is clean

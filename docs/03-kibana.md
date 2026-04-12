@@ -16,9 +16,11 @@ It is commonly used for:
 
 Kibana is often the first place where users notice whether the underlying data model is clean or messy.
 
+Viewing data in Kibana the fastest way to validate whether the rest of the pipeline is producing good data.
+
 ### Kibana's Role
 
-Kibana does **NOT** store the main dataset itself. It queries Elasticsearch and presents the results in a user-friendly interface.
+Kibana does not store the main dataset itself. It queries Elasticsearch and presents the results in a user-friendly interface.
 
 That means many Kibana problems are really data problems from earlier in the pipeline.
 
@@ -79,27 +81,11 @@ A dashboard might show:
 - recent critical events
 - event counts by environment
 
+Good advice is to use Kibana Discover before building dashboards.
+
 Dashboards are useful when you want a repeatable operational view rather than one-off exploration.
 
->>> TODO
-
-## A Good Beginner Workflow In Kibana
-
-A common workflow looks like this:
-
-1. Create a data view for the target indexes
-2. Open Discover and confirm documents look correct
-3. Verify that `@timestamp` and key fields are usable
-4. Build one or two visualizations
-5. Add those visualizations to a dashboard
-
-## Time Is Usually The Starting Point
-
-Many ELK use cases depend on time-based data. If your documents have a valid `@timestamp` field with the correct datatype, Kibana can filter and chart events over time.
-
-This is one of the most important reasons to normalize timestamps in Logstash.
-
-Without a correct time field, many of Kibana's most useful features become harder to use.
+Visualizations and dashboards are for analysis and monitoring.
 
 ## Common Ways To Explore Data
 
@@ -122,7 +108,7 @@ Searching is usually a combination of:
 - exact filters for fields like `service`, `level`, or `environment`
 - time filters to narrow the analysis window
 
-## Why Field Types Matter Here
+## Importance of Field Types
 
 Kibana depends heavily on Elasticsearch datatypes.
 
@@ -134,39 +120,3 @@ Examples:
 - a `text` field is useful for reading and searching message content
 
 If a field has the wrong datatype, the visualization options may not make sense.
-
-## Questions Kibana Should Help You Answer
-
-Kibana helps answer questions like:
-
-- how many failed login events happened in the last hour
-- which service produced the most errors today
-- when did a spike begin
-- which services are generating warnings
-- what raw events are behind a chart anomaly
-
-## Good First Visualizations
-
-Good first visualizations include:
-
-- events over time
-- top log levels
-- top services
-- recent error table
-- average `response_time_ms` by service
-
-These are simple, but they quickly reveal whether your data is being indexed correctly.
-
-## Why Kibana Becomes So Valuable
-
-Elasticsearch is powerful, but Kibana makes that power usable for day-to-day work. It gives analysts, engineers, and operators a way to inspect data without manually writing every query.
-
-It is also the fastest way to validate whether the rest of the pipeline is producing good data.
-
-## Key Takeaways
-
-- Kibana is the UI layer of the ELK stack
-- It reads data from Elasticsearch
-- Data views define which indexes you work with
-- Discover is for raw exploration
-- Visualizations and dashboards are for analysis and monitoring

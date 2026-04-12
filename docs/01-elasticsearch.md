@@ -1,6 +1,6 @@
 # Elasticsearch
 
-> Storage system
+> Distributed search & analytics engine
 
 ## What is Elasticsearch?
 
@@ -14,7 +14,7 @@ It is commonly used for:
 - security analytics
 - application search
 
-It is especially powerful when your data has clear field types and you need to search, filter, and aggregate close to real time.
+It is especially powerful when your data has clear field types and you need to search, filter, and aggregate in near real time.
 
 ## Keywords
 
@@ -25,9 +25,10 @@ Elasticsearch terminology:
 - **Field**: a property on a record
 - **Mapping**: defines the datatype for each field
 - **Node**: a single running instance of Elasticsearch on a given server
-- **Cluster**: collection of nodes that work together as a single Elasticsearch system
-- **Shard**: a split up index for the data can be distributed across nodes
-- **Replica**: a copy of a shard, useful for redundancy in case a node fails
+- **Cluster**: collection of nodes that work together as a single Elasticsearch system; maintains a shared state that tracks indexes, shards, and node assignments
+- **Shard**: a partition of an index that allows data to be distributed across nodes
+  - **Primary shard**: the original shard where data is written
+  - **Replica shard**: a copy of a primary shard used for redundancy and read scaling
 
 ## Key Concepts
 
@@ -48,13 +49,11 @@ Example:
 }
 ```
 
-Each document should represent one meaningful event or entity. In log pipelines, one log event usually becomes one document.
+Each document should represent one logical event or entity. In log pipelines, one log event usually becomes one document.
 
 ### Index
 
 An index is a collection of related documents.
-
-You can think of it as being similar to a table in a relational database.
 
 For more information, see [How To Organize Indexes](#how-to-organize-indexes).
 
@@ -65,6 +64,20 @@ Examples:
 - `api-metrics`
 
 Indexes are often organized by data type, source system, or time period.
+
+## Inverted Index
+
+Elasticsearch uses an inverted index under the hood.
+
+Instead of storing documents directly for lookup, it builds a structure mapping terms to documents.
+
+Each term is stored along with the list of documents that contain it.
+
+Example:
+
+"login failed" → doc1, doc7, doc42
+
+This is what makes full-text search extremely fast.
 
 ### Field
 
@@ -139,7 +152,7 @@ For example:
 - `user_id` as `long` supports numeric aggregations
 - `response_time_ms` as `integer` supports averages and ranges
 
-## DataTypes
+## Datatypes
 
 ### `text`
 
@@ -239,6 +252,8 @@ That is why datatype planning matters before large amounts of data are ingested.
 Elasticsearch can infer field datatypes automatically when new fields appear.
 
 This is convenient for experimentation, but it can cause problems in real pipelines.
+
+Dynamic mapping can silently introduce bad data models that are difficult to fix later, especially once indexes are large
 
 Examples of issues:
 

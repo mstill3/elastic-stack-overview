@@ -6,6 +6,8 @@
 
 Logstash is a data processing pipeline. It ingests data from one or more sources, transforms that data, and sends it to one or more destinations.
 
+Logstash is optional in the ELK stack. In simpler setups, Beats or applications can send data directly to Elasticsearch.
+
 Its main purpose is moving and transforming events between systems. A primary goal is to convert raw data into structured events
 
 It is often used to:
@@ -135,7 +137,7 @@ Example input data:
 2026-04-09T20:00:00Z ERROR auth-api user_id=42 response_time_ms=124 message="User login failed"
 ```
 
-Inputs determine how data **enters** the pipeline.
+Inputs define how data **enters** the pipeline.
 
 ### 2. Filters
 
@@ -149,7 +151,7 @@ Common filters:
 - `json`: parse JSON text
 - `geoip`: enrich IP addresses with location data
 
-This is where most of the real "work" happens.
+This is where most transformation and enrichment happens.
 
 Example:
 
@@ -268,3 +270,23 @@ Use `mutate` to:
 ### Normalize timestamps with `date`
 
 Use `date` to make sure time values become `@timestamp`.
+
+## Conditionals
+
+Logstash supports conditionals to control processing:
+
+```conf
+if [level] == "ERROR" {
+    mutate {
+        add_field => { "alert" => true }
+    }
+}
+```
+
+## Backpressure and Buffering
+
+Logstash helps absorb bursts of incoming data and prevents downstream systems from being overwhelmed.
+
+- inputs can receive data faster than outputs can send it
+- Logstash buffers events internally
+- helps stabilize pipelines during spikes

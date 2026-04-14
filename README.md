@@ -1,6 +1,6 @@
 # ELK Stack Overview
 
-> Elasticsearch, Logstash, Kibana
+> Elasticsearch, Logstash, and Kibana
 
 ## Notes Guide
 

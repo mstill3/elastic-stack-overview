@@ -1,6 +1,6 @@
 # ELK Stack
 
-> Elasticsearch, Logstash, Kibana
+> Elasticsearch, Logstash, and Kibana
 
 ## What is the ELK Stack?
 
@@ -49,7 +49,7 @@ Each tool has a separate responsibility, which makes the stack easier to scale a
 
 This usually works best when field names and datatypes are consistent from the start.
 
-## Example
+Example:
 
 Raw log line:
 

@@ -6,10 +6,10 @@
 
 Elasticsearch is a distributed search and analytics engine. It is designed to store large volumes of structured data and make that data searchable very quickly.
 
-| Name                            | Port | Protocol |
-| ------------------------------- | ---- | -------- |
-| Default HTTP API                | 9200 | TCP      |
-| Default transport between nodes | 9300 | TCP      |
+| Port | Protocol | Purpose               |
+| ---- | -------- | --------------------- |
+| 9200 | TCP      | REST API / Queries    |
+| 9300 | TCP      | Cluster communication |
 
 It is commonly used for:
 

@@ -1,8 +1,10 @@
-# ELK Stack
+# Elastic Stack
 
-> Elasticsearch, Logstash, and Kibana
+> Elasticsearch, Beats, Logstash & Kibana
 
-## What is the ELK Stack?
+## What is the Elastic Stack?
+
+Had previously been called ELK stack, but now its more general and can have more components than those 3
 
 The ELK stack is a common setup for ingesting, storing, searching, and visualizing event data.
 
